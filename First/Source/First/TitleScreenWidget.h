@@ -23,10 +23,13 @@ public:
 
 private:
 	UPROPERTY(meta = (BindWidget))
-		UButton* StartButton;
+	UButton* StartButton;
 	UPROPERTY(meta = (BindWidget))
-		UTextBlock* TitleText;
+	UTextBlock* TitleText;
+
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UUserWidget> LobbyWidghetClass;
 
 	UFUNCTION()
-		void OnStartButtonClicked();
+	void OnStartButtonClicked();
 };

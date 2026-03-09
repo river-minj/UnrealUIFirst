@@ -17,5 +17,15 @@ void UTitleScreenWidget::NativeConstruct()
 
 void UTitleScreenWidget::OnStartButtonClicked()
 {
+	if (LobbyWidghetClass)
+	{
+		UUserWidget* LobbyWidget = CreateWidget<UUserWidget>(GetWorld(), LobbyWidghetClass);
+		if (LobbyWidget)
+		{
+			LobbyWidget->AddToViewport();
+			this->RemoveFromParent();
+		}
+	}
+
 	UE_LOG(LogTemp, Log, TEXT("Start Button Clicked"))
 }
