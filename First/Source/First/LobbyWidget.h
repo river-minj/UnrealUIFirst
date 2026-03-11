@@ -6,6 +6,8 @@
 
 class UButton;
 class UWidgetSwitcher;
+class UListView;
+class UTileView;
 
 UCLASS()
 class FIRST_API ULobbyWidget : public UUserWidget
@@ -28,6 +30,12 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	UWidgetSwitcher* ContentSwitcher;
 
+	UPROPERTY(meta = (BindWidget))
+	UListView* ShopListView;
+
+	UPROPERTY(meta = (BindWidget))
+	UTileView* InventoryTileView;
+
 	UFUNCTION()
 	void OnShopButtonClicked();
 
@@ -36,4 +44,8 @@ protected:
 
 	UFUNCTION()
 	void OnSettingsButtonClicked();
+
+private:
+	void PopulateShopItems();
+	void PopulateInventoryItems();
 };
