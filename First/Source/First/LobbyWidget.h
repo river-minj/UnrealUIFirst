@@ -39,7 +39,7 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	UTileView* InventoryTileView;
 
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
+		UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UUserWidget> TitleWidgetClass;
 
 	UFUNCTION()
