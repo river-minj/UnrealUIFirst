@@ -24,12 +24,20 @@ public:
 private:
 	UPROPERTY(meta = (BindWidget))
 	UButton* StartButton;
+
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* TitleText;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* FadeOutAnim;
+
 
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UUserWidget> LobbyWidghetClass;
 
 	UFUNCTION()
 	void OnStartButtonClicked();
+
+	UFUNCTION()
+	void OnFadeOutFinished();
 };
