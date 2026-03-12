@@ -28,6 +28,9 @@ protected:
 	UButton* SettingsButton;
 
 	UPROPERTY(meta = (BindWidget))
+	UButton* BackButton;
+
+	UPROPERTY(meta = (BindWidget))
 	UWidgetSwitcher* ContentSwitcher;
 
 	UPROPERTY(meta = (BindWidget))
@@ -35,6 +38,9 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	UTileView* InventoryTileView;
+
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UUserWidget> TitleWidgetClass;
 
 	UFUNCTION()
 	void OnShopButtonClicked();
@@ -44,6 +50,9 @@ protected:
 
 	UFUNCTION()
 	void OnSettingsButtonClicked();
+
+	UFUNCTION()
+	void OnBackButtonClicked();
 
 private:
 	void PopulateShopItems();

@@ -32,6 +32,11 @@ void ULobbyWidget::NativeConstruct()
 		SettingsButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnSettingsButtonClicked);
 	}
 
+	if (BackButton)
+	{
+		BackButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnBackButtonClicked);
+	}
+
 	PopulateShopItems();
 	PopulateInventoryItems();
 }
@@ -59,6 +64,17 @@ void ULobbyWidget::OnSettingsButtonClicked()
 		ContentSwitcher->SetActiveWidgetIndex(2);
 	}
 }
+
+void ULobbyWidget::OnBackButtonClicked()
+{
+	UUserWidget* TitleWidget = CreateWidget<UUserWidget>(GetWorld(), TitleWidgetClass);
+	if (TitleWidget)
+	{
+		TitleWidget->AddToViewport();
+		RemoveFromParent();
+	}
+}
+
 
 void ULobbyWidget::PopulateShopItems()
 {
