@@ -4,6 +4,8 @@
 #include "SettingsWidget.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
+#include "Components/CheckBox.h"
+#include "Components/ComboBoxString.h"
 
 void USettingsWidget::NativeConstruct()
 {
@@ -21,6 +23,21 @@ void USettingsWidget::NativeConstruct()
 		SFXSlider->SetValue(0.5f);
 		SFXSlider->OnValueChanged.AddDynamic(this, &USettingsWidget::OnSFXVolumeChanged);
 		OnSFXVolumeChanged(0.5f);
+	}
+
+	if (FullscreenCheckBox)
+	{
+		FullscreenCheckBox->OnCheckStateChanged.AddDynamic(this, &USettingsWidget::OnFullscreenChange);
+
+	}
+
+	if (LanguageComboBox)
+	{
+		LanguageComboBox->AddOption(TEXT("한국어"));
+		LanguageComboBox->AddOption(TEXT("English"));
+		LanguageComboBox->SetSelectedIndex(0);
+		LanguageComboBox->OnSelectionChanged.AddDynamic(this, &USettingsWidget::OnLanguageChanged);
+
 	}
 }
 
@@ -42,4 +59,14 @@ void USettingsWidget::OnSFXVolumeChanged(float Value)
 		SFXValueText->SetText(FText::FromString(FString::Printf(TEXT("%d"), DisplayValue)));
 	}
 	UE_LOG(LogTemp, Log, TEXT("SFX Volume: %f"), Value);
+}
+
+void USettingsWidget::OnFullscreenChange(bool bIsChekcked)
+{
+	UE_LOG(LogTemp, Log, TEXT("Fullscreen: %s"), bIsChekcked ? TEXT("ON") : TEXT("OFF"));
+}
+
+void USettingsWidget::OnLanguageChanged(FString SelectedItem, ESelectInfo::Type SelectedType)
+{
+	UE_LOG(LogTemp, Log, TEXT("Language: %s"), *SelectedItem)
 }

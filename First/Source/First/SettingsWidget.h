@@ -8,6 +8,8 @@
 
 class USlider;
 class UTextBlock;
+class UCheckBox;
+class UComboBoxString;
 
 UCLASS()
 class FIRST_API USettingsWidget : public UUserWidget
@@ -23,6 +25,12 @@ protected:
 	UFUNCTION()
 	void OnSFXVolumeChanged(float Value);
 
+	UFUNCTION()
+	void OnFullscreenChange(bool bIsChecked);
+
+	UFUNCTION()
+	void OnLanguageChanged(FString SelectedItem, ESelectInfo::Type SelectionType);
+
 	UPROPERTY(meta = (BindWidget))
 	USlider* BGMSlider;
 
@@ -34,5 +42,11 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* SFXValueText;
+
+	UPROPERTY(meta = (BindWidget))
+	UCheckBox* FullscreenCheckBox;
+
+	UPROPERTY(meta = (BindWidget))
+	UComboBoxString* LanguageComboBox;
 
 };
