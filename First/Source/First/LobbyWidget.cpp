@@ -37,6 +37,18 @@ void ULobbyWidget::NativeConstruct()
 		BackButton->OnClicked.AddDynamic(this, &ULobbyWidget::OnBackButtonClicked);
 	}
 
+	if (FadeOutAnim)
+	{
+		FWidgetAnimationDynamicEvent EndDelegate;
+		EndDelegate.BindDynamic(this, &ULobbyWidget::OnFadeOutFinished);
+		BindToAnimationFinished(FadeOutAnim, EndDelegate);
+	}
+
+	if (FadeInAnim)
+	{
+		PlayAnimation(FadeInAnim);
+	}
+
 	PopulateShopItems();
 	PopulateInventoryItems();
 }
@@ -67,11 +79,22 @@ void ULobbyWidget::OnSettingsButtonClicked()
 
 void ULobbyWidget::OnBackButtonClicked()
 {
-	UUserWidget* TitleWidget = CreateWidget<UUserWidget>(GetWorld(), TitleWidgetClass);
-	if (TitleWidget)
+	if (FadeOutAnim)
 	{
-		TitleWidget->AddToViewport();
-		RemoveFromParent();
+		PlayAnimation(FadeOutAnim);
+	}
+}
+
+void ULobbyWidget::OnFadeOutFinished()
+{
+	if (TitleWidgetClass)
+	{
+		UUserWidget* TitleWidget = CreateWidget<UUserWidget>(GetWorld(), TitleWidgetClass);
+		if (TitleWidget)
+		{
+			TitleWidget->AddToViewport();
+			RemoveFromParent();
+		}
 	}
 }
 

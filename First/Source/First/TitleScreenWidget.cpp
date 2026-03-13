@@ -13,9 +13,31 @@ void UTitleScreenWidget::NativeConstruct()
 	{
 		StartButton->OnClicked.AddDynamic(this, &UTitleScreenWidget::OnStartButtonClicked);
 	}
+
+	if (FadeOutAnim)
+	{
+		FWidgetAnimationDynamicEvent EndDelegate;
+		EndDelegate.BindDynamic(this, &UTitleScreenWidget::OnFadeOutFinished);
+		BindToAnimationFinished(FadeOutAnim, EndDelegate);
+	}
+
+	if (FadeInAnim)
+	{
+		PlayAnimation(FadeInAnim);
+	}
 }
 
 void UTitleScreenWidget::OnStartButtonClicked()
+{
+	if (FadeOutAnim)
+	{
+		PlayAnimation(FadeOutAnim);
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("Start Button Clicked"))
+}
+
+void UTitleScreenWidget::OnFadeOutFinished()
 {
 	if (LobbyWidghetClass)
 	{
@@ -23,9 +45,7 @@ void UTitleScreenWidget::OnStartButtonClicked()
 		if (LobbyWidget)
 		{
 			LobbyWidget->AddToViewport();
-			this->RemoveFromParent();
+			RemoveFromParent();
 		}
 	}
-
-	UE_LOG(LogTemp, Log, TEXT("Start Button Clicked"))
 }

@@ -39,8 +39,14 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	UTileView* InventoryTileView;
 
-		UPROPERTY(EditDefaultsOnly, Category = "UI")
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UUserWidget> TitleWidgetClass;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* FadeOutAnim;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* FadeInAnim;
 
 	UFUNCTION()
 	void OnShopButtonClicked();
@@ -53,6 +59,9 @@ protected:
 
 	UFUNCTION()
 	void OnBackButtonClicked();
+
+	UFUNCTION()
+	void OnFadeOutFinished();
 
 private:
 	void PopulateShopItems();

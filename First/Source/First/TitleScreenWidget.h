@@ -31,9 +31,11 @@ private:
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* FadeOutAnim;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UUserWidget> LobbyWidghetClass;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* FadeInAnim;
 
 	UFUNCTION()
 	void OnStartButtonClicked();
